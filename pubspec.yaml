@@ -1,0 +1,9 @@
+name: d3_quadtree_flutter
+description: "Two-dimensional recursive spatial subdivision: Flutter implementation of d3-quadtree (WIP)"
+
+publish_to: "none"
+
+version: 0.0.1
+
+environment:
+  sdk: ">=2.13.0-0 <3.0.0"
