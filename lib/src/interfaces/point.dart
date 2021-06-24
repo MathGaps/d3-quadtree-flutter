@@ -3,4 +3,6 @@ abstract class IPoint {
 
   double x;
   double y;
+
+  bool get isNaN => x.isNaN || y.isNaN;
 }

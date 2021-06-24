@@ -5,7 +5,9 @@ import 'nodes.dart';
 
 part '../extensions/x.dart';
 part '../extensions/y.dart';
+part '../extensions/add.dart';
 part '../extensions/cover.dart';
+part '../extensions/extent.dart';
 
 class Quadtree<P extends IPoint> {
   Quadtree({
