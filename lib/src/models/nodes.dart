@@ -1,9 +1,9 @@
 import 'dart:collection';
 
 import 'package:d3_quadtree_flutter/src/interfaces/point.dart';
-import 'package:d3_quadtree_flutter/src/models/quadtree.dart';
+import 'package:d3_quadtree_flutter/src/interfaces/quadtree_node.dart';
 
-class Nodes<P extends IPoint> with IterableMixin<Quadtree<P>?> {
+class Nodes<P extends IPoint> with IterableMixin<IQuadtreeNode<P>?> {
   Nodes({
     this.nw,
     this.ne,
@@ -11,19 +11,19 @@ class Nodes<P extends IPoint> with IterableMixin<Quadtree<P>?> {
     this.se,
   });
 
-  Quadtree<P>? nw, ne, sw, se;
+  IQuadtreeNode<P>? nw, ne, sw, se;
 
   bool get anyNonNull => nw != null || ne != null || sw != null || se != null;
 
   @override
-  Iterator<Quadtree<P>?> get iterator => [nw, ne, sw, se].iterator;
+  Iterator<IQuadtreeNode<P>?> get iterator => [nw, ne, sw, se].iterator;
 
-  Quadtree<P>? operator [](int i) {
+  IQuadtreeNode<P>? operator [](int i) {
     if (i < 0 || i > 5) throw RangeError.range(i, 0, 4);
     return toList()[i];
   }
 
-  void operator []=(int i, Quadtree<P>? node) {
+  void operator []=(int i, IQuadtreeNode<P>? node) {
     if (i < 0 || i > 5) throw RangeError.range(i, 0, 4);
     switch (i) {
       case 0:

@@ -1,6 +1,10 @@
 part of '../models/quadtree.dart';
 
 extension on bool {
+  /// Helper method for evaluating bitwise operations on [bool], by coercing
+  /// into [int].
+  ///
+  /// I'm lazy ok
   int operator -() => this ? 1 : 0;
 }
 
@@ -22,7 +26,7 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
 
       double z = x1 == x0 ? 1 : x1 - x0;
 
-      Quadtree<P>? node = root;
+      IQuadtreeNode<P>? node = root;
       late Quadtree<P> parent;
 
       late int i;
@@ -55,7 +59,11 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
         z *= 2;
       }
 
-      if (root?.nodes?.anyNonNull ?? false) root = node;
+      if (root is IInternalNode<P>) {
+        /// Weird Dart typing error?
+        if ((root as IInternalNode<P>).nodes?.anyNonNull ?? false) return;
+        root = node;
+      }
     }
 
     extent = Extent(x0, x1, y0, y1);
