@@ -17,7 +17,7 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
     late double x0, y0, x1, y1;
     if (_extent == null) {
       x1 = (x0 = x.floorToDouble()) + 1;
-      y1 = (y0 = x.floorToDouble()) + 1;
+      y1 = (y0 = y.floorToDouble()) + 1;
     } else {
       x0 = _extent!.x0;
       x1 = _extent!.x1;
@@ -61,8 +61,9 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
 
       if (root is IInternalNode<P>) {
         /// Weird Dart typing error?
-        if ((root as IInternalNode<P>).nodes?.anyNonNull ?? false) return;
-        root = node;
+        if ((root as IInternalNode<P>).nodes?.anyNonNull ?? false) {
+          root = node;
+        }
       }
     }
 

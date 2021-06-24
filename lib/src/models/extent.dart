@@ -17,4 +17,7 @@ class Extent {
       o is Extent && x0 == o.x0 && y0 == o.y0 && x1 == o.x1 && y1 == o.y1;
   @override
   int get hashCode => hash4(x0, y0, x1, y1);
+
+  @override
+  String toString() => '($x0, $y0), ($x1, $y1)';
 }

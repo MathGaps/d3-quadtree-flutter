@@ -5,6 +5,6 @@ extension ExtentX<P extends IPoint> on Quadtree<P> {
     if (extent != null) {
       this..cover(extent.lowerBound)..cover(extent.upperBound);
     }
-    return extent;
+    return _extent;
   }
 }

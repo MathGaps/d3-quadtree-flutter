@@ -22,5 +22,3 @@ void main() {
     );
   });
 }
-
-XAccessor x = (point) => point.x;
