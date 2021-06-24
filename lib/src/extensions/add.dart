@@ -3,6 +3,7 @@ part of '../models/quadtree.dart';
 extension AddX<P extends IPoint> on Quadtree<P> {
   void add(P point) {
     if (point.isNaN) return;
+    cover(point);
 
     ILeafNode<P> leaf = Leaf(point);
     IInternalNode<P>? parent;
@@ -78,7 +79,8 @@ extension AddX<P extends IPoint> on Quadtree<P> {
     } while (
         (i = -bottom << 1 | -right) == (j = -(yp >= ym) << 1 | -(xp >= xm)));
 
-    parent.nodes![j] = node;
-    parent.nodes![i] = leaf;
+    (parent.nodes ??= Nodes())
+      ..[j] = node
+      ..[i] = leaf;
   }
 }
