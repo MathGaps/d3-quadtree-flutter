@@ -28,14 +28,13 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
 
       IQuadtreeNode<P>? node = root;
       late Quadtree<P> parent;
-
       late int i;
 
       while (x0 > x || x >= x1 || y0 > y || y >= y1) {
         i = -(y < y0) << 1 | -(x < x0);
-        parent = Quadtree<P>(extent: Extent.zero);
-        parent.nodes = Nodes()..[i] = node;
+        parent = Quadtree<P>()..nodes = (Nodes()..[i] = node);
         node = parent;
+        z *= 2;
 
         switch (i) {
           case 0:
@@ -50,13 +49,11 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
             x1 = x0 + z;
             y0 = y1 - z;
             break;
-          case 0:
+          case 3:
             x0 = x1 - z;
             y0 = y1 - z;
             break;
         }
-
-        z *= 2;
       }
 
       if (root is IInternalNode<P>) {

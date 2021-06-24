@@ -12,6 +12,8 @@ class Point implements IPoint {
   @override
   bool get isNaN => x.isNaN || y.isNaN;
 
+  static Point zero = Point(0, 0);
+
   @override
   bool operator ==(Object o) => o is Point && x == o.x && y == o.y;
   @override
