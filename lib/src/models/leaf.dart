@@ -1,5 +1,6 @@
 import 'package:d3_quadtree_flutter/src/interfaces/point.dart';
 import 'package:d3_quadtree_flutter/src/interfaces/quadtree_node.dart';
+import 'package:quiver/core.dart';
 
 class Leaf<P extends IPoint> implements ILeafNode<P> {
   Leaf(this._point);
@@ -21,4 +22,10 @@ class Leaf<P extends IPoint> implements ILeafNode<P> {
 
   @override
   bool get isNaN => _point.isNaN;
+
+  @override
+  bool operator ==(Object o) =>
+      o is Leaf<P> && _point == o.point && next == o.next;
+  @override
+  int get hashCode => hash2(_point, next);
 }

@@ -15,14 +15,14 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
     if (x.isNaN || y.isNaN) return;
 
     late double x0, y0, x1, y1;
-    if (extent == null) {
+    if (_extent == null) {
       x1 = (x0 = x.floorToDouble()) + 1;
       y1 = (y0 = x.floorToDouble()) + 1;
     } else {
-      x0 = extent!.x0;
-      x1 = extent!.x1;
-      y0 = extent!.y0;
-      y1 = extent!.y1;
+      x0 = _extent!.x0;
+      x1 = _extent!.x1;
+      y0 = _extent!.y0;
+      y1 = _extent!.y1;
 
       double z = x1 == x0 ? 1 : x1 - x0;
 
@@ -66,6 +66,6 @@ extension CoverX<P extends IPoint> on Quadtree<P> {
       }
     }
 
-    extent = Extent(x0, x1, y0, y1);
+    _extent = Extent(x0, y0, x1, y1);
   }
 }

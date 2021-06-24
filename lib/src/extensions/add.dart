@@ -19,7 +19,10 @@ extension AddX<P extends IPoint> on Quadtree<P> {
       return;
     }
 
-    double x0 = extent!.x0, y0 = extent!.y0, x1 = extent!.x1, y1 = extent!.y1;
+    double x0 = _extent!.x0,
+        y0 = _extent!.y0,
+        x1 = _extent!.x1,
+        y1 = _extent!.y1;
 
     /// Find the existing leaf for the new point, or add it.
     //? This condition failing implies that [node] is [ILeafNode<P>]

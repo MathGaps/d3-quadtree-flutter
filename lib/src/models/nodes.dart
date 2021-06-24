@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:d3_quadtree_flutter/src/interfaces/point.dart';
 import 'package:d3_quadtree_flutter/src/interfaces/quadtree_node.dart';
+import 'package:quiver/core.dart';
 
 class Nodes<P extends IPoint> with IterableMixin<IQuadtreeNode<P>?> {
   Nodes({
@@ -40,4 +41,10 @@ class Nodes<P extends IPoint> with IterableMixin<IQuadtreeNode<P>?> {
         break;
     }
   }
+
+  @override
+  bool operator ==(Object o) =>
+      o is Nodes<P> && nw == o.nw && ne == o.ne && sw == o.sw && se == o.se;
+  @override
+  int get hashCode => hash4(nw, ne, sw, se);
 }

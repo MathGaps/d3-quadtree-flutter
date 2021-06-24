@@ -11,7 +11,7 @@ abstract class IInternalNode<P extends IPoint> implements IQuadtreeNode<P> {
 
   XAccessor<P> x;
   YAccessor<P> y;
-  Extent? extent;
+  Extent? _extent;
 
   Nodes<P>? nodes;
   IQuadtreeNode<P>? root;
