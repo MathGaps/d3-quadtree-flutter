@@ -59,5 +59,11 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
         [x, y, _extent, nodes, root],
       );
   @override
-  String toString() => 'root: $root\nnodes: $nodes\nextent: $_extent';
+  String toString() {
+    return {
+      'root': root.toString(),
+      'nodes': nodes.toString(),
+      'extent': _extent.toString(),
+    }.toString();
+  }
 }

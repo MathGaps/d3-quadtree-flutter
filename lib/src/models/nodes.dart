@@ -47,6 +47,4 @@ class Nodes<P extends IPoint> with IterableMixin<IQuadtreeNode<P>?> {
       o is Nodes<P> && nw == o.nw && ne == o.ne && sw == o.sw && se == o.se;
   @override
   int get hashCode => hash4(nw, ne, sw, se);
-  @override
-  String toString() => '$nw, $ne, $sw, $se';
 }
