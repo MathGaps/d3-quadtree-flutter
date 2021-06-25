@@ -42,4 +42,32 @@ void main() {
       expect(q.extent(), Extent(0, 0, 2, 2));
     },
   );
+
+  test(
+    'Quadtree.remove(point) removes another non-root point in the quadtree',
+    () {
+      final q = Quadtree<Point>()..addAll([p00, p11]);
+      expect((q..remove(p11)).root, p00.leaf);
+      expect(q.extent(), Extent(0, 0, 2, 2));
+    },
+  );
+
+  test(
+    'Quadtree.remove(point) ignores a point not in the quadtree',
+    () {
+      final q0 = Quadtree<Point>()..add(p00);
+      expect((q0..remove(p11)).root, p00.leaf);
+      expect(q0.extent(), Extent(0, 0, 1, 1));
+    },
+  );
+
+  test(
+    'Quadtree.remove(point) ignores a coincident point not in the quadtree',
+    () {
+      // TODO
+      final q0 = Quadtree<Point>()..add(p00);
+      expect((q0..remove(p11)).root, p00.leaf);
+      expect(q0.extent(), Extent(0, 0, 1, 1));
+    },
+  );
 }

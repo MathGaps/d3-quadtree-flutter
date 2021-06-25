@@ -14,6 +14,9 @@ part '../extensions/add.dart';
 part '../extensions/cover.dart';
 part '../extensions/extent.dart';
 part '../extensions/remove.dart';
+part '../extensions/size.dart';
+part '../extensions/visit.dart';
+part '../extensions/visit_after.dart';
 
 class Quadtree<P extends IPoint> implements IInternalNode<P> {
   Quadtree({
