@@ -26,8 +26,8 @@ extension AddX<P extends IPoint> on Quadtree<P> {
         y1 = _extent!.y1;
 
     /// Find the existing leaf for the new point, or add it.
-    //? This condition failing implies that [node] is [ILeafNode<P>]
-    while (node is IInternalNode<P> && (node.nodes?.anyNonNull ?? false)) {
+    /// This condition failing implies that [node] is [ILeafNode<P>]
+    while (node is IInternalNode<P> && (node.nodes?.isNotEmpty ?? false)) {
       if (right = dx >= (xm = (x0 + x1) / 2)) {
         x0 = xm;
       } else {
@@ -41,7 +41,9 @@ extension AddX<P extends IPoint> on Quadtree<P> {
       }
 
       parent = node;
-      if ((node = node.nodes![i = -bottom << 1 | -right]) != null) {
+
+      /// This asserts that [node] cannot be null on break
+      if ((node = node.nodes![i = -bottom << 1 | -right]) == null) {
         parent.nodes![i] = leaf;
         return;
       }
@@ -64,8 +66,8 @@ extension AddX<P extends IPoint> on Quadtree<P> {
     /// Otherwise, split the leaf until the old and new point are separated.
     do {
       parent = parent != null
-          ? parent.nodes![i] = Quadtree<P>()
-          : root = Quadtree<P>();
+          ? parent.nodes![i] = (Quadtree<P>()..nodes = Nodes())
+          : root = (Quadtree<P>()..nodes = Nodes());
       if (right = dx >= (xm = (x0 + x1) / 2)) {
         x0 = xm;
       } else {
@@ -88,18 +90,15 @@ extension AddX<P extends IPoint> on Quadtree<P> {
     late P p;
     late double dx, dy;
     final n = points.length;
-    final List<double?> xz = List.filled(n, null), yz = List.filled(n, null);
 
     double x0 = double.infinity,
         y0 = double.infinity,
-        x1 = double.infinity,
-        y1 = double.infinity;
+        x1 = double.negativeInfinity,
+        y1 = double.negativeInfinity;
 
     /// Compute the points and their extent
     for (var i = 0; i < n; ++i) {
       if ((dx = x(p = points[i])).isNaN || (dy = y(p)).isNaN) continue;
-      xz[i] = dx;
-      yz[i] = dy;
       if (dx < x0) x0 = dx;
       if (dx > x1) x1 = dx;
       if (dy < y0) y0 = dy;
