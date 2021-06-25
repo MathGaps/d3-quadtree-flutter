@@ -52,33 +52,43 @@ extension RemoveX<P extends IPoint> on Quadtree<P> {
         }
       }
 
+    if (node is IInternalNode<P>) print('1: ${node.nodes}');
+
     /// Find the point to remove.
     while ((node as ILeafNode<P>).point != point) {
       previous = node;
-      if ((node = node.next) != null) return;
+      if ((node = node.next) == null) return;
     }
+
     if ((next = node.next) != null) node.next = null;
+
+    if (node is IInternalNode<P>)
+      print('2: ${(node as IInternalNode<P>).nodes}');
 
     /// If there are multiple coincident points, remove just the point
     if (previous != null) {
       previous.next = next;
       return;
     }
+    if (node is IInternalNode<P>)
+      print('3: ${(node as IInternalNode<P>).nodes}');
 
     /// If this is the root point, remove it
     if (parent == null) {
       root = next;
       return;
     }
+    if (node is IInternalNode<P>)
+      print('4: ${(node as IInternalNode<P>).nodes}');
 
     /// Remove this leaf
     (parent.nodes ??= Nodes())[i] = next;
 
     /// If the parent now contains exactly one leaf, collapse superfluous parents
     if (((node = parent.nodes![0]) != null ||
-                parent.nodes![1] != null ||
-                parent.nodes![2] != null ||
-                parent.nodes![3] != null) &&
+                (node = parent.nodes![1]) != null ||
+                (node = parent.nodes![2]) != null ||
+                (node = parent.nodes![3]) != null) &&
             node == parent.nodes![3] ||
         node == parent.nodes![2] ||
         node == parent.nodes![1] ||
@@ -86,8 +96,10 @@ extension RemoveX<P extends IPoint> on Quadtree<P> {
             (node is ILeafNode<P> ||
                 (node is IInternalNode<P> && (node.nodes?.isEmpty ?? true)))) {
       if (retainer != null) {
+        print('yo: $nodes');
         retainer.nodes![j] = node;
       } else {
+        print('yo2: $node');
         root = node;
       }
     }

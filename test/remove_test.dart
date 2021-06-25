@@ -38,7 +38,6 @@ void main() {
     'Quadtree.remove(point) removes a non-root point in the quadtree',
     () {
       final q = Quadtree<Point>()..addAll([p00, p11]);
-      expect(q.nodes?.where((e) => e != null).length, 2);
       expect((q..remove(p00)).root, p11.leaf);
       expect(q.extent(), Extent(0, 0, 2, 2));
     },
