@@ -1,6 +1,5 @@
 import 'package:d3_quadtree_flutter/src/interfaces/quadtree_node.dart';
 import 'package:d3_quadtree_flutter/src/models/leaf.dart';
-import 'package:d3_quadtree_flutter/src/models/point.dart';
 import 'package:quiver/core.dart';
 
 import '../interfaces/point.dart';
@@ -14,6 +13,7 @@ part '../extensions/y.dart';
 part '../extensions/add.dart';
 part '../extensions/cover.dart';
 part '../extensions/extent.dart';
+part '../extensions/remove.dart';
 
 class Quadtree<P extends IPoint> implements IInternalNode<P> {
   Quadtree({
