@@ -4,4 +4,6 @@ abstract class IPoint {
   double x, y;
 
   bool get isNaN => x.isNaN || y.isNaN;
+
+  external IPoint get copy;
 }

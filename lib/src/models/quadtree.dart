@@ -16,9 +16,9 @@ part '../extensions/extent.dart';
 
 class Quadtree<P extends IPoint> implements IInternalNode<P> {
   Quadtree({
-    XAccessor? x,
-    YAccessor? y,
-    Extent? extent,
+    XAccessor<P>? x,
+    YAccessor<P>? y,
+    Extent? extent, // TODO: remove
   })  : this.x = x ?? _defaultX,
         this.y = y ?? _defaultY,
         _extent = extent;
@@ -29,6 +29,21 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
 
   Nodes<P>? nodes;
   IQuadtreeNode<P>? root;
+
+  Quadtree<P> get copy {
+    return Quadtree<P>(
+      x: x,
+      y: y,
+      extent: _extent,
+    )
+      ..nodes = Nodes(
+        nw: nodes?.nw,
+        ne: nodes?.ne,
+        sw: nodes?.sw,
+        se: nodes?.se,
+      )
+      ..root = root?.copy;
+  }
 
   @override
   bool operator ==(Object o) =>

@@ -18,6 +18,9 @@ class Point implements IPoint {
   Leaf<Point> get leaf => Leaf(this);
 
   @override
+  Point get copy => Point(x, y);
+
+  @override
   bool operator ==(Object o) => o is Point && x == o.x && y == o.y;
   @override
   int get hashCode => hash2(x, y);

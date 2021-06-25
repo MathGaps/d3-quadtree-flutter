@@ -4,7 +4,9 @@ import 'package:d3_quadtree_flutter/src/models/nodes.dart';
 import 'package:d3_quadtree_flutter/src/typedefs/accessors.dart';
 
 /// Represents a node -- internal or leaf, of a quadtree.
-abstract class IQuadtreeNode<P extends IPoint> {}
+abstract class IQuadtreeNode<P extends IPoint> {
+  external IQuadtreeNode<P> get copy;
+}
 
 abstract class IInternalNode<P extends IPoint> implements IQuadtreeNode<P> {
   IInternalNode._(this.x, this.y);
@@ -15,6 +17,8 @@ abstract class IInternalNode<P extends IPoint> implements IQuadtreeNode<P> {
 
   Nodes<P>? nodes;
   IQuadtreeNode<P>? root;
+
+  external IInternalNode<P> get copy;
 }
 
 abstract class ILeafNode<P extends IPoint> implements IQuadtreeNode<P> {
@@ -25,4 +29,5 @@ abstract class ILeafNode<P extends IPoint> implements IQuadtreeNode<P> {
 
   external P get point;
   external bool get isNaN;
+  external ILeafNode<P> get copy;
 }
