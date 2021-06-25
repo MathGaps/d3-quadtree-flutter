@@ -92,4 +92,8 @@ extension RemoveX<P extends IPoint> on Quadtree<P> {
       }
     }
   }
+
+  void removeAll(List<P> points) {
+    points.forEach(remove);
+  }
 }
