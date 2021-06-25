@@ -1,6 +1,5 @@
 import 'package:d3_quadtree_flutter/src/interfaces/point.dart';
 import 'package:d3_quadtree_flutter/src/interfaces/quadtree_node.dart';
-import 'package:d3_quadtree_flutter/src/models/point.dart';
 import 'package:quiver/core.dart';
 
 class Leaf<P extends IPoint> implements ILeafNode<P> {
@@ -32,4 +31,6 @@ class Leaf<P extends IPoint> implements ILeafNode<P> {
       o is Leaf<P> && _point == o.point && next == o.next;
   @override
   int get hashCode => hash2(_point, next);
+  @override
+  String toString() => 'Leaf($_point)';
 }

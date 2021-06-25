@@ -9,9 +9,7 @@ extension on bool {
 }
 
 extension CoverX<P extends IPoint> on Quadtree<P> {
-  void cover(IPoint point) {
-    double x = point.x, y = point.y;
-
+  void cover(double x, double y) {
     if (x.isNaN || y.isNaN) return;
 
     late double x0, y0, x1, y1;

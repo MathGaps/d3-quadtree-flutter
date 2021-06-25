@@ -24,4 +24,6 @@ class Point implements IPoint {
   bool operator ==(Object o) => o is Point && x == o.x && y == o.y;
   @override
   int get hashCode => hash2(x, y);
+  @override
+  String toString() => '($x, $y)';
 }

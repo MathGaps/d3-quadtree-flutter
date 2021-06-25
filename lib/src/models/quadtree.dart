@@ -57,4 +57,6 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
   int get hashCode => hashObjects(
         [x, y, _extent, nodes, root],
       );
+  @override
+  String toString() => 'root: $root\nnodes: $nodes\nextent: $_extent';
 }

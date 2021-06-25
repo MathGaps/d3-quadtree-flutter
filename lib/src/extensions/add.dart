@@ -3,7 +3,7 @@ part of '../models/quadtree.dart';
 extension AddX<P extends IPoint> on Quadtree<P> {
   void add(P point) {
     if (point.isNaN) return;
-    cover(point);
+    cover(point.x, point.y);
 
     ILeafNode<P> leaf = Leaf(point);
     IInternalNode<P>? parent;
@@ -82,5 +82,39 @@ extension AddX<P extends IPoint> on Quadtree<P> {
     (parent.nodes ??= Nodes())
       ..[j] = node
       ..[i] = leaf;
+  }
+
+  void addAll(List<P> points) {
+    late P p;
+    late double dx, dy;
+    final n = points.length;
+    final List<double?> xz = List.filled(n, null), yz = List.filled(n, null);
+
+    double x0 = double.infinity,
+        y0 = double.infinity,
+        x1 = double.infinity,
+        y1 = double.infinity;
+
+    /// Compute the points and their extent
+    for (var i = 0; i < n; ++i) {
+      if ((dx = x(p = points[i])).isNaN || (dy = y(p)).isNaN) continue;
+      xz[i] = dx;
+      yz[i] = dy;
+      if (dx < x0) x0 = dx;
+      if (dx > x1) x1 = dx;
+      if (dy < y0) y0 = dy;
+      if (dy > y1) y1 = dy;
+    }
+
+    /// If there were no (valid) points, abort
+    if (x0 > x1 || y0 > y1) return;
+
+    /// Expand the tree to cover the new points
+    this..cover(x0, y0)..cover(x1, y1);
+
+    /// Add the new points
+    for (var i = 0; i < n; ++i) {
+      this.add(points[i]);
+    }
   }
 }
