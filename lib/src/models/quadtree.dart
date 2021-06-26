@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:d3_quadtree_flutter/src/interfaces/quadtree_node.dart';
 import 'package:d3_quadtree_flutter/src/models/leaf.dart';
+import 'package:d3_quadtree_flutter/src/models/quad.dart';
 import 'package:quiver/core.dart';
 
 import '../interfaces/point.dart';
@@ -17,18 +20,22 @@ part '../extensions/remove.dart';
 part '../extensions/size.dart';
 part '../extensions/visit.dart';
 part '../extensions/visit_after.dart';
+part '../extensions/find.dart';
 
 class Quadtree<P extends IPoint> implements IInternalNode<P> {
   Quadtree({
     XAccessor<P>? x,
     YAccessor<P>? y,
     Extent? extent, // TODO: remove
-  })  : this.x = x ?? _defaultX,
-        this.y = y ?? _defaultY,
+  })  : _x = x ?? _defaultX,
+        _y = y ?? _defaultY,
         _extent = extent;
 
-  XAccessor<P> x;
-  YAccessor<P> y;
+  XAccessor<P> _x;
+  set x(XAccessor<P> x) => _x = x;
+  YAccessor<P> _y;
+  set y(YAccessor<P> y) => _y = y;
+
   Extent? _extent;
 
   Nodes<P>? nodes;
@@ -36,8 +43,8 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
 
   Quadtree<P> get copy {
     return Quadtree<P>(
-      x: x,
-      y: y,
+      x: _x,
+      y: _y,
       extent: _extent,
     )
       ..nodes = Nodes(
@@ -52,14 +59,14 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
   @override
   bool operator ==(Object o) =>
       o is Quadtree<P> &&
-      x == o.x &&
-      y == o.y &&
+      _x == o._x &&
+      _y == o._y &&
       _extent == o._extent &&
       nodes == o.nodes &&
       root == o.root;
   @override
   int get hashCode => hashObjects(
-        [x, y, _extent, nodes, root],
+        [_x, _y, _extent, nodes, root],
       );
   @override
   String toString() {

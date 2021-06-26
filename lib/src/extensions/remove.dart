@@ -3,7 +3,7 @@ part of '../models/quadtree.dart';
 extension RemoveX<P extends IPoint> on Quadtree<P> {
   void remove(P point) {
     late final double dx, dy;
-    if ((dx = x(point)).isNaN || (dy = y(point)).isNaN) return;
+    if ((dx = _x(point)).isNaN || (dy = _y(point)).isNaN) return;
 
     IInternalNode<P>? parent, retainer;
     ILeafNode<P>? previous, next;

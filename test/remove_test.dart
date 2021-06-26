@@ -70,4 +70,23 @@ void main() {
       expect(q0.extent(), Extent(0, 0, 1, 1));
     },
   );
+
+  test(
+    'Quadtree.remove(point) removes another point in the quadtree',
+    () {
+      final q = Quadtree<Point>()..extent(Extent(0, 0, 959, 959));
+      q.addAll([
+        Point(630, 438),
+        Point(715, 464),
+        Point(523, 519),
+        Point(646, 318),
+        Point(434, 620),
+        Point(570, 489),
+        Point(520, 345),
+        Point(459, 443),
+        Point(346, 405),
+        Point(529, 444),
+      ]);
+    },
+  );
 }

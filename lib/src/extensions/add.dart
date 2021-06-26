@@ -8,7 +8,7 @@ extension AddX<P extends IPoint> on Quadtree<P> {
     ILeafNode<P> leaf = Leaf(point);
     IInternalNode<P>? parent;
     IQuadtreeNode<P>? node = root;
-    final dx = x(point), dy = y(point);
+    final dx = _x(point), dy = _y(point);
 
     late bool right, bottom;
     late double xm, ym, xp, yp;
@@ -51,8 +51,8 @@ extension AddX<P extends IPoint> on Quadtree<P> {
     node = node as ILeafNode<P>;
 
     /// Is the new point exactly coincident with the existing point?
-    xp = x(node.point);
-    yp = y(node.point);
+    xp = _x(node.point);
+    yp = _y(node.point);
     if (dx == xp && dy == yp) {
       leaf.next = node;
       if (parent != null) {
@@ -98,7 +98,7 @@ extension AddX<P extends IPoint> on Quadtree<P> {
 
     /// Compute the points and their extent
     for (var i = 0; i < n; ++i) {
-      if ((dx = x(p = points[i])).isNaN || (dy = y(p)).isNaN) continue;
+      if ((dx = _x(p = points[i])).isNaN || (dy = _y(p)).isNaN) continue;
       if (dx < x0) x0 = dx;
       if (dx > x1) x1 = dx;
       if (dy < y0) y0 = dy;
