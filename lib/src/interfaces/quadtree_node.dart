@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:d3_quadtree_flutter/src/interfaces/point.dart';
 import 'package:d3_quadtree_flutter/src/models/extent.dart';
 import 'package:d3_quadtree_flutter/src/models/nodes.dart';
