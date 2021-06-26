@@ -1,7 +1,7 @@
 part of '../models/quadtree.dart';
 
 extension VisitAfterX<P extends IPoint> on Quadtree<P> {
-  void visit(VisitCallback<P> callback) {
+  void visitAfter(VisitCallback<P> callback) {
     final List<Quad<P>> quads = [], next = [];
     IQuadtreeNode<P>? child;
 
