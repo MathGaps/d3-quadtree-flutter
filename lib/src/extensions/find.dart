@@ -1,7 +1,7 @@
 part of '../models/quadtree.dart';
 
 extension FindX<P extends IPoint> on Quadtree<P> {
-  P? find(double x, double y, [double radius = double.infinity]) {
+  P? find(double x, double y, [double? radius = double.infinity]) {
     P? point;
     double x0 = _extent!.x0,
         y0 = _extent!.y0,
@@ -15,7 +15,7 @@ extension FindX<P extends IPoint> on Quadtree<P> {
     late int i;
 
     if (node != null) quads.add(Quad(node, extent: Extent(x0, y0, x3, y3)));
-    if (radius.isFinite) {
+    if ((radius ??= double.infinity).isFinite) {
       x0 = x - radius;
       y0 = y - radius;
       x3 = x + radius;
@@ -58,7 +58,7 @@ extension FindX<P extends IPoint> on Quadtree<P> {
             dy = y - _y(node.point),
             d2 = dx * dx + dy * dy;
 
-        if (d2 < radius) {
+        if (d2 < radius!) {
           final d = sqrt(radius = d2);
           x0 = x - d;
           y0 = y - d;

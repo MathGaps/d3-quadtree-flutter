@@ -27,10 +27,12 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
   Quadtree({
     XAccessor<P>? x,
     YAccessor<P>? y,
-    Extent? extent, // TODO: remove
+    Iterable<P>? points,
   })  : _x = x ?? _defaultX,
-        _y = y ?? _defaultY,
-        _extent = extent;
+        _y = y ?? _defaultY {
+    if (points == null) return;
+    addAll([...points]);
+  }
 
   XAccessor<P> _x;
   set x(XAccessor<P> x) => _x = x;
@@ -45,8 +47,8 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
     return Quadtree<P>(
       x: _x,
       y: _y,
-      extent: _extent,
     )
+      .._extent = _extent
       ..nodes = nodes == null
           ? null
           : Nodes(
