@@ -38,7 +38,6 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
   set y(YAccessor<P> y) => _y = y;
 
   Extent? _extent;
-
   Nodes<P>? nodes;
   IQuadtreeNode<P>? root;
 
@@ -48,12 +47,14 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
       y: _y,
       extent: _extent,
     )
-      ..nodes = Nodes(
-        nw: nodes?.nw,
-        ne: nodes?.ne,
-        sw: nodes?.sw,
-        se: nodes?.se,
-      )
+      ..nodes = nodes == null
+          ? null
+          : Nodes(
+              nw: nodes?.nw,
+              ne: nodes?.ne,
+              sw: nodes?.sw,
+              se: nodes?.se,
+            )
       ..root = root?.copy;
   }
 

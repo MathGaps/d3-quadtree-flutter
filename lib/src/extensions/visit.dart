@@ -1,5 +1,6 @@
 part of '../models/quadtree.dart';
 
+// If the callback returns true for a given node, then the children of that node are not visited
 typedef VisitCallback<P extends IPoint> = bool Function(
   IQuadtreeNode<P>? node,
   Extent extent,

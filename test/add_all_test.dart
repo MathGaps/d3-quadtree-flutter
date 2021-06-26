@@ -1,11 +1,7 @@
 import 'package:d3_quadtree_flutter/d3_quadtree_flutter.dart';
 import 'package:test/test.dart';
 
-final p00 = Point.zero;
-final p0909 = Point(0.9, 0.9);
-final p0900 = Point(0.9, 0.0);
-final p0009 = Point(0.0, 0.9);
-final p0404 = Point(0.4, 0.4);
+import 'add_test.dart';
 
 void main() {
   test(
