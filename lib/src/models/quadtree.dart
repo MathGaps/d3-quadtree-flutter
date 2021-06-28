@@ -43,6 +43,9 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
   Nodes<P>? nodes;
   IQuadtreeNode<P>? root;
 
+  //! Used in d3-force. Should abstract away, but I cba
+  double? r;
+
   Quadtree<P> get copy {
     return Quadtree<P>(
       x: _x,
