@@ -13,6 +13,9 @@ class Leaf<P extends IPoint> implements ILeafNode<P> {
   P get point => _point;
 
   @override
+  double? r;
+
+  @override
   double get x => _point.x;
   set x(double x) => _point.x = x;
 
