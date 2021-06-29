@@ -13,7 +13,7 @@ class Leaf<P extends IPoint> implements ILeafNode<P> {
   P get point => _point;
 
   @override
-  double? r;
+  double? r, value;
 
   @override
   double get x => _point.x;

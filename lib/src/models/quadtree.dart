@@ -43,7 +43,7 @@ class Quadtree<P extends IPoint> implements IInternalNode<P> {
   Nodes<P>? nodes;
   IQuadtreeNode<P>? root;
   @override
-  double? r;
+  double? r, value;
 
   Quadtree<P> get copy {
     return Quadtree<P>(
