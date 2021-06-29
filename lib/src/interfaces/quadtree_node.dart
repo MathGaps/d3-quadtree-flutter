@@ -7,8 +7,10 @@ import 'package:d3_quadtree_flutter/src/typedefs/accessors.dart';
 
 /// Represents a node -- internal or leaf, of a quadtree.
 abstract class IQuadtreeNode<P extends IPoint> {
-  //! Used in d3-force. Should abstract away, but I cba
-  double? r, value;
+  //! ONLY used in d3-force. Should abstract away, but I cba
+  // TODO: allow full abstraction of IQuadtreeNodes and subclasses. Creation of
+  // TODO: internal nodes can be handled by a callback IInternalNode Function(...)
+  double? r, value, fx, fy;
 
   external IQuadtreeNode<P> get copy;
 }

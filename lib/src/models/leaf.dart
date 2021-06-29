@@ -13,7 +13,8 @@ class Leaf<P extends IPoint> implements ILeafNode<P> {
   P get point => _point;
 
   @override
-  double? r, value;
+  //? for d3-force
+  double? r, value, fx, fy;
 
   @override
   double get x => _point.x;
