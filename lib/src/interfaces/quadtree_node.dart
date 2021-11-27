@@ -12,7 +12,7 @@ abstract class IQuadtreeNode<P extends IPoint> {
   // TODO: internal nodes can be handled by a callback IInternalNode Function(...)
   double? r, value, fx, fy;
 
-  external IQuadtreeNode<P> get copy;
+  IQuadtreeNode<P> get copy;
 }
 
 abstract class IInternalNode<P extends IPoint> implements IQuadtreeNode<P> {
@@ -25,7 +25,7 @@ abstract class IInternalNode<P extends IPoint> implements IQuadtreeNode<P> {
   Nodes<P>? nodes;
   IQuadtreeNode<P>? root;
 
-  external IInternalNode<P> get copy;
+  IInternalNode<P> get copy;
 }
 
 abstract class ILeafNode<P extends IPoint> implements IQuadtreeNode<P> {
@@ -34,7 +34,7 @@ abstract class ILeafNode<P extends IPoint> implements IQuadtreeNode<P> {
   double x, y;
   ILeafNode<P>? next;
 
-  external P get point;
-  external bool get isNaN;
-  external ILeafNode<P> get copy;
+  P get point;
+  bool get isNaN;
+  ILeafNode<P> get copy;
 }
